@@ -1,0 +1,31 @@
+#!/usr/bin/env node
+
+const prompt = require('prompt-sync')();
+
+const publicKey = prompt('input your public key : ').replace(/\\r|\\n/g, "\n");
+if (publicKey.length == 0) {
+    console.error('public key must non-empty');
+    process.exit(1);
+}
+
+const plaintext = prompt('input your plaintext : ');
+if (plaintext.length == 0) {
+    console.error('plaintext must non-empty');
+    process.exit(1);
+}
+
+var scheme = prompt('input your encrypt scheme(default: pkcs8-public-pem) :')
+if (scheme.length == 0) {
+    scheme = 'pkcs8-public-pem'
+}
+
+console.log('your public key :');
+console.log(publicKey);
+console.log('your plaintext :', plaintext);
+console.log('your encrypt scheme :', scheme);
+
+const key = require('node-rsa')(publicKey, scheme);
+const ciphertext = key.encrypt(plaintext, 'base64');
+
+const urlencode = require('urlencode');
+console.log('ciphertext with urlencoding :', urlencode(ciphertext, 'utf8'));

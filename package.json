@@ -1,0 +1,20 @@
+{
+  "name": "rsa_encryptor",
+  "version": "1.0.0",
+  "description": "使用pkcs8-public-pem格式公钥对明文进行加密",
+  "main": "./bin/encryptor",
+  "bin": {
+    "encryptor": "./bin/encryptor"
+  },
+  "scripts": {
+    "start": "node ./bin/encryptor",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "phantom27",
+  "license": "ISC",
+  "dependencies": {
+    "node-rsa": "^1.1.1",
+    "prompt-sync": "^4.2.0",
+    "urlencode": "^1.1.0"
+  }
+}
